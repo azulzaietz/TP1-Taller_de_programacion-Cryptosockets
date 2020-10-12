@@ -1,6 +1,8 @@
 #include "common_RC4.h"
 
 int create(rc4_t* self, unsigned char* key) {
+    self->i = 0;
+    self->j = 0;
      _create_state_vector(key, self->state_vector);
     return 0;
 }
@@ -24,22 +26,12 @@ void _swap(unsigned char* s, int pos1, int pos2) {
 }
 
 void code(rc4_t* self, unsigned char *message, size_t read_bytes) {
-    _create_encryption_stream(self, read_bytes);
-    for (int i = 0; i < read_bytes; i++) {
-        message[i] = message[i] ^ self->encryption_stream[i];
-    }
-}
-
-void _create_encryption_stream(rc4_t* self, size_t read_bytes) {
-
-    unsigned char i = 0;
-    unsigned char j = 0;
 
     for (int i = 0; i < read_bytes; i++) {
-        i = (i + 1) % 256;
-        j = (j + self->state_vector[i]) % 256;
-        _swap(self->state_vector, i, j);
-        self->encryption_stream[i] = self->state_vector[ (self->state_vector[i] + self->state_vector[j]) % 256];
+        self->i = (self->i + 1) % 256;
+        self->j = (self->j + self->state_vector[self->i]) % 256;
+        _swap(self->state_vector, self->i, self->j);
+        message[i] = message[i] ^ self->state_vector[ (self->state_vector[self->i] + self->state_vector[self->j]) % 256];
     }
 }
 
