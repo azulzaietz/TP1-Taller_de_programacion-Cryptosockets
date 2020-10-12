@@ -6,7 +6,6 @@
  * *****************************************************************/
 
 typedef struct {
-    unsigned char* key;
     unsigned char state_vector[256];
     unsigned char* encryption_stream;
 } rc4_t;
@@ -30,7 +29,7 @@ void _swap(unsigned char* vector, int pos1, int pos2);
 //Genera un vector K del mismo tamaño que el mensaje a cifrar
 //para luego realizar el XOR en el paso final del cifrado 
 //del mensaje original contra sus valores.
-void _create_encryption_stream(rc4_t* self, unsigned char* k, size_t read_bytes);
+void _create_encryption_stream(rc4_t* self, size_t read_bytes);
 
 //Recibe un mensaje a cifrar como parámetro.
 //Post: devuelve el mensaje cifrado
