@@ -1,8 +1,6 @@
 #include "common_file_reader.h"
 #include <errno.h>
 #include <string.h>
-/*#include <iostream>
-#include <exception>*/
 
 int file_reader_init(file_reader_t* self, const char* file_name) {
     self->fp = file_name != NULL ? fopen(file_name, "rb") : stdin;
