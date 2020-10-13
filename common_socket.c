@@ -1,15 +1,130 @@
 #include "common_socket.h"
 
-void socket_init(socket_t* self){}
-void socket_uninit(socket_t* self){}
+void socket_init(socket_t* self, int fd){
+	self->fd = fd;
+}
 
-void socket_bind_and_listen(socket_t* self, const char* host, const char* service){}
-void socket_accept(socket_t* listener, socket_t* peer){}
+void socket_uninit(socket_t* self){
+	if (!self) return;
+    if (shutdown(self->fd, SHUT_RDWR) == -1) {
+		fprintf(stderr, "socket_uninit-->shutdown: %s\n", strerror(errno));
+    }
+    if (close(self->fd) == -1) {
+		fprintf(stderr, "socket_uninit-->close: %s\n", strerror(errno));
+    }
+}
 
-void socket_connect(socket_t* self, const char* host, const char* service){}
+static struct addrinfo* _get_addrinfo(socket_t* self, const char* host, const char* service, int flags) {
+	int error;
+	struct addrinfo *addr_list;
+	struct addrinfo hints;
+	memset(&hints, 0, sizeof(struct addrinfo));
+	hints.ai_family = FAMILY;
+    hints.ai_socktype = SOCK_TYPE;
+    hints.ai_protocol = PROTOCOL;    
+	hints.ai_flags = flags;
+	if ((error = getaddrinfo(host, service, &hints, &addr_list)) != 0) {
+		fprintf(stderr, "_get_addrinfo: %s\n", gai_strerror(error));
+        return NULL;
+    }
+	return addr_list;
+}
 
-ssize_t socket_send(socket_t* self, const char* buffer, size_t length){}
-ssize_t socket_receive(socket_t* self, const char* buffer, size_t length){}
+bool socket_bind_and_listen(socket_t* self, const char* host, const char* service){
+
+	bool bind = false;
+	int fd;
+	int val = 1;
+	struct addrinfo *addr, *addr_list;
+	if ((addr_list = _get_addrinfo(self, host, service, SERVER_FLAGS) < 0)) return false;
+
+	for (addr = addr_list; addr && !bind; addr = addr->ai_next) {
+        fd = socket(addr->ai_family, addr->ai_socktype, addr->ai_protocol);
+		setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, &val, sizeof(val));
+        if (bind(fd, addr->ai_addr, addr->ai_addrlen) == 0) bind = true;
+    }
+    freeaddrinfo(addr_list);
+
+    if (!bind) {
+		fprintf(stderr, "socket_bind_and_listen-->bind: %s\n", strerror(errno));
+        return false;
+    }
+
+	socket_init(self, fd);
+
+	if (listen(self->fd, 10) < 0) {
+		socket_uninit(self);
+		fprintf(stderr, "socket_bind_and_listen-->listen: %s\n", strerror(errno));
+		return false;
+	}
+	return true;
+}
+
+int socket_accept(socket_t* listener, socket_t* client){
+	int fd = -1;
+	if (accept(listener, client, sizeof(client)) < 0) {
+		fprintf(stderr, "socket_accept-->accept: %s\n", strerror(errno));
+	}
+	return fd;
+}
+
+bool socket_connect(socket_t* self, const char* host, const char* service){
+
+	int fd;
+	bool connection = false;
+    struct addrinfo *addr, *addr_list;
+    if ((addr_list = _get_addrinfo(self, host, service, CLIENT_FLAGS)) == NULL) {
+        return false;
+    }
+
+    for (addr = addr_list; addr && !connection; addr = addr->ai_next) {
+        fd = socket(addr->ai_family, addr->ai_socktype, addr->ai_protocol);
+        if (connect(fd, addr->ai_addr, addr->ai_addrlen) == 0) connection = true;
+    }
+    freeaddrinfo(addr_list);
+
+    if (!connection) {
+		fprintf(stderr, "socket_connect-->connect: %s\n", strerror(errno));
+        return false;
+    }
+
+	socket_init(self, fd);
+    return true;
+     
+}
+
+ssize_t socket_send(socket_t* self, const char* buffer, size_t length){
+	if (length == 0) return 0;
+    int remaining_bytes = length;
+    int total_bytes_sent = 0;
+    ssize_t bytes = 0;
+    while (total_bytes_sent < length) {
+        bytes = send(self->fd, &buffer[total_bytes_sent], remaining_bytes, MSG_NOSIGNAL);
+        if (bytes == -1) {
+			fprintf(stderr, "socket_send-->send: %s\n", strerror(errno));
+            return bytes;
+        }
+        if (bytes == 0) return total_bytes_sent;
+        total_bytes_sent += bytes;
+        remaining_bytes -= bytes;
+    }
+}
+ssize_t socket_receive(socket_t* self, const char* buffer, size_t length){
+	if (length == 0) return 0;
+    int remaining_bytes = length;
+    int total_bytes_received = 0;
+    ssize_t bytes = 0;
+    while (total_bytes_received < length) {
+        bytes = recv(self->fd, &buffer[total_bytes_received], remaining_bytes, 0);
+        if (bytes == -1) {
+            fprintf(stderr, "socket_receive-->recv: %s\n", strerror(errno));
+            return bytes;
+        }
+        if (bytes == 0) return total_bytes_received;
+        total_bytes_received += bytes;
+        remaining_bytes -= bytes;
+    }
+}
 
 static void _send_chunk(const char *chunk, size_t chunk_size, void *callback_ctx) {
 	socket_t *socket = callback_ctx;
