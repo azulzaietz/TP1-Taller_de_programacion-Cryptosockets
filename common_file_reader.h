@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stddef.h>
 #define BUF_SIZE 64
 
 /* *****************************************************************
