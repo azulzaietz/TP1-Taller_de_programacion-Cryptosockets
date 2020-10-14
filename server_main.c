@@ -26,16 +26,17 @@ un descriptor de fichero que puede ser utilizado para la comunicación con el cl
 int main(int argc, char const* argv[]) {
 
     socket_t socket;
+	socket_t peer;
+	char buffer[64];
+
     socket_bind_and_listen(&socket, NULL, argv[1]);
 
-    file_reader_t file_reader;
-    file_reader_init(&file_reader, NULL);
+    socket_accept(&socket, &peer);
+    socket_receive(&peer, buffer, 64);
 
-    file_reader_iterate(&file_reader, _send_chunk, &socket);
+    printf("Buffer recibido: %s\n", buffer);
 
-    file_reader_uninit(&file_reader);
     socket_uninit(&socket);
 
     return 0;
 }
-
