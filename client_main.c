@@ -1,5 +1,5 @@
 #include "common_socket.h"
-//#include "common_file_reader.h"
+#include "common_file_reader.h"
 
 /*
 1º) int socket ( int dominio, int tipo, int protocolo )  
@@ -17,12 +17,11 @@
           El tipo de estructura dependerá del dominio en que nos encontremos. 
 */
 
-static void _send_chunk(const char *chunk, size_t chunk_size, void *callback_ctx) {
+static void _send_chunk(char *chunk, size_t chunk_size, void *callback_ctx) {
 	socket_t *socket = callback_ctx;
 	socket_send(socket, chunk, chunk_size);
 }
 
-/*
 int main(int argc, char const* argv[]) {
 
     socket_t socket;
@@ -37,20 +36,4 @@ int main(int argc, char const* argv[]) {
     socket_uninit(&socket);
 
     return 0;
-}*/
-
-int main(int argc, char *argv[]) {
-
-	const char* buffer;
-	socket_t socket;
-
-	buffer = argv[3];
-
-	socket_connect(&socket, argv[1], argv[2]);
-  
-	socket_send(&socket, buffer, strlen(buffer));
-
-	socket_uninit(&socket);
-
-	return 0;
 }
