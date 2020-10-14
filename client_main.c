@@ -28,11 +28,11 @@ int main(int argc, char const* argv[]) {
     socket_connect(&socket, argv[1], argv[2]);
 
     file_reader_t file_reader;
-    file_reader_init(&file_reader, NULL);
+    file_open(&file_reader, NULL);
 
-    file_reader_iterate(&file_reader, _send_chunk, &socket);
+    read_file(&file_reader, _send_chunk, &socket);
 
-    file_reader_uninit(&file_reader);
+    file_close(&file_reader);
     socket_uninit(&socket);
 
     return 0;
