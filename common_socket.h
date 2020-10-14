@@ -13,7 +13,6 @@
 #include <netdb.h>
 #include <errno.h>
 
-#define _POSIX_C_SOURCE 200112L
 #define FAMILY AF_INET
 #define PROTOCOL 0
 #define SOCK_TYPE SOCK_STREAM
@@ -57,8 +56,6 @@ bool socket_connect(socket_t* self, const char* host, const char* service);
 ssize_t socket_send(socket_t* self, const char* buffer, size_t length);
 
 //Devuelve la cantidad de bytes recibidos o -1 si ocurrió un error.
-ssize_t socket_receive(socket_t* self, const char* buffer, size_t length);
-
-static void _send_chunk(const char *chunk, size_t chunk_size, void *callback_ctx);
+ssize_t socket_receive(socket_t* self, char* buffer, size_t length);
 
 #endif
