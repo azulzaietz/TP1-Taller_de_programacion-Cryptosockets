@@ -18,7 +18,7 @@ typedef struct {
 
 //Crea un cifrador RC4
 //Post: devuelve un cifrador con la clave a utilizar para cifrar y descifrar
-int create(rc4_t* self, unsigned char* key);
+int rc4_create(rc4_t* self, unsigned char* key);
 
 //Genera vector de entrada para el flujo de cifrado.
 //Vector de 256 elementos con todos los números del 0 al 255 y luego los
@@ -30,8 +30,8 @@ void _swap(unsigned char* vector, int pos1, int pos2);
 
 //Recibe un mensaje a cifrar como parámetro.
 //Post: devuelve el mensaje cifrado
-void code(rc4_t* self, unsigned char *message, size_t read_bytes);
+void rc4_code(rc4_t* self, unsigned char *message, size_t read_bytes);
 
 //Recibe un mensaje codificado
 //Post: devuelve el mensaje descifrado (original).
-void decode(rc4_t* self, unsigned char* message, size_t read_bytes);
+void rc4_decode(rc4_t* self, unsigned char* message, size_t read_bytes);

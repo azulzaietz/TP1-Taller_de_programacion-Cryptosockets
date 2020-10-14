@@ -1,6 +1,6 @@
 #include "common_RC4.h"
 
-int create(rc4_t* self, unsigned char* key) {
+int rc4_create(rc4_t* self, unsigned char* key) {
     self->i = 0;
     self->j = 0;
      _create_state_vector(key, self->state_vector);
@@ -25,7 +25,7 @@ void _swap(unsigned char* s, int pos1, int pos2) {
     s[pos2] = temp;
 }
 
-void code(rc4_t* self, unsigned char *message, size_t read_bytes) {
+void rc4_code(rc4_t* self, unsigned char *message, size_t read_bytes) {
 
     for (int i = 0; i < read_bytes; i++) {
         self->i = (self->i + 1) % 256;
