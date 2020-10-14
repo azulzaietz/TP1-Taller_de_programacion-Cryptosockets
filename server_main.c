@@ -27,14 +27,17 @@ int main(int argc, char const* argv[]) {
 
     socket_t socket;
 	socket_t peer;
-	char buffer[64];
+	char buffer[BUF_SIZE];
 
     socket_bind_and_listen(&socket, NULL, argv[1]);
 
     socket_accept(&socket, &peer);
-    socket_receive(&peer, buffer, 64);
 
-    printf("Buffer recibido: %s\n", buffer);
+    ssize_t sr = 0;
+
+    while ((sr = socket_receive(&peer, buffer, BUF_SIZE)) != 0) {
+        fwrite(buffer, sizeof(char), sr, stdout);
+    }
 
     socket_uninit(&socket);
 
