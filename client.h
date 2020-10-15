@@ -18,6 +18,6 @@ typedef struct {
 
 void init_client(client_t* self, const char* server_host, const char* server_port, const char* method, const char* key);
 
-void send_message_to_server(client_t* self);
+void send_coded_message_to_server(client_t* self);
 
 void uninit_client(client_t* self);
