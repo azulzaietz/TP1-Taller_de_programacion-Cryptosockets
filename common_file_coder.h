@@ -14,7 +14,7 @@
  * *****************************************************************/
 
 typedef void (*file_coder_callback_t)(char *chunk, size_t chunk_size, void *callback_ctx);
-typedef void (*coder_t) (void* coder, unsigned char* key, char* chunk);
+typedef void (*coder_t) (void* coder, unsigned char* message, size_t length);
 
 typedef struct {
     FILE* fp;

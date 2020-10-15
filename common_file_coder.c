@@ -16,27 +16,32 @@ int file_coder_init(file_coder_t* self, const char* file_name, const char* metho
 }
 
 void _init_coder_method(file_coder_t* self, const char* method, unsigned char* key) {
+    
+    char* method_cesar = "cesar";
+    char* method_vigenere = "vigenere";
+    char* method_rc4 = "rc4";
 
-    if(*method == 'rc4') {
+    if (strcmp(method, method_cesar) == 0) {
+        
+        cesar_t* cesar;
+        self->coder = cesar;
+        cesar_create(self->coder, key);
+        self->coder_method = cesar_code;
 
-        rc4_t* rc4;
-        self->coder = rc4;
-        rc4_create(self->coder, key);
-        self->coder_method = rc4_code;
-
-    } else if (*method == 'vigenere') {
+    } else if (strcmp(method, method_vigenere) == 0) {
 
         vigenere_t* vigenere;
         self->coder = vigenere;
         vigenere_create(self->coder, key);
         self->coder_method = vigenere_code;
 
-    } else if (*method == 'cesar') {
-        
-        cesar_t* cesar;
-        self->coder = cesar;
-        cesar_create(self->coder, key);
-        self->coder_method = cesar_code;
+    } else if(strcmp(method, method_rc4) == 0) {
+ 
+        rc4_t* rc4;
+        self->coder = rc4;
+        rc4_create(self->coder, key);
+        self->coder_method = rc4_code;
+
     }
 }
 
@@ -56,7 +61,7 @@ int code_file(file_coder_t* self, file_coder_callback_t callback, void* callback
 
     while(!feof(self->fp)){
         size_t read_bytes = fread(buffer, sizeof(char), BUF_SIZE, self->fp);
-        self->coder_method(self->coder, buffer, read_bytes);
+        self->coder_method(self->coder, buffer, (size_t) read_bytes);
         callback(buffer, read_bytes, callback_ctx);
     }
     return 0;
