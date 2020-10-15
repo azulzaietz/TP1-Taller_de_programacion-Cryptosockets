@@ -1,6 +1,6 @@
 #include "common_file_coder.h"
 
-void file_coder_init(file_coder_t* self, const char* file_name, const char* method, unsigned char* key) {
+int file_coder_init(file_coder_t* self, const char* file_name, const char* method, unsigned char* key) {
 
     if (file_name == NULL) self->fp = stdin;
     else self->fp = fopen(file_name, "rb");
@@ -17,31 +17,26 @@ void file_coder_init(file_coder_t* self, const char* file_name, const char* meth
 
 void _init_coder_method(file_coder_t* self, const char* method, unsigned char* key) {
 
-    switch (*method)
-    {
-    case 'rc4':
+    if(*method == 'rc4') {
+
         rc4_t* rc4;
         self->coder = rc4;
         rc4_create(self->coder, key);
         self->coder_method = rc4_code;
-        break;
 
-    case 'vigenere':
+    } else if (*method == 'vigenere') {
+
         vigenere_t* vigenere;
         self->coder = vigenere;
         vigenere_create(self->coder, key);
         self->coder_method = vigenere_code;
-        break;
 
-    case 'cesar':
+    } else if (*method == 'cesar') {
+        
         cesar_t* cesar;
         self->coder = cesar;
         cesar_create(self->coder, key);
         self->coder_method = cesar_code;
-        break;
-
-    default:
-        break;
     }
 }
 

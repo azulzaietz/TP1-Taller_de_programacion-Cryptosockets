@@ -26,8 +26,10 @@ typedef struct {
  *                PRIMITIVAS DEL FILE CODER
  * *****************************************************************/
 
-void file_coder_init(file_coder_t* self, const char* file_name, const char* method, unsigned char* key);
+int file_coder_init(file_coder_t* self, const char* file_name, const char* method, unsigned char* key);
 
 void _init_coder_method(file_coder_t* self, const char* method, unsigned char* key);
+
+int code_file(file_coder_t* self, file_coder_callback_t callback, void* callback_ctx);
 
 int file_coder_uninit(file_coder_t* self);
