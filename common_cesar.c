@@ -1,6 +1,6 @@
 #include "common_cesar.h"
 
-int cesar_create(cesar_t* self, int key) {
+int cesar_create(cesar_t* self, unsigned char* key) {
     self->key = key;
     return 0;
 }

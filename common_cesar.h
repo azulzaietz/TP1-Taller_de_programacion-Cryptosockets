@@ -7,7 +7,7 @@
  * *****************************************************************/
 
 typedef struct {
-    int key;
+    unsigned char* key;
 } cesar_t;
 
 /* *****************************************************************
@@ -16,7 +16,7 @@ typedef struct {
 
 //Crea un cifrador de cesar
 //Post: devuelve un cifrador con la clave a utilizar para cifrar y descifrar
-int cesar_create(cesar_t* self, int key);
+int cesar_create(cesar_t* self, unsigned char* key);
 
 //Libera la memoria reservada para el cifrador.
 //Pre: el cifrador fue inicializado (creado)
