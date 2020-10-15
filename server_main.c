@@ -1,5 +1,5 @@
 #include "common_socket.h"
-#include "common_file_reader.h"
+#include "common_file_coder.h"
 
 /*
 1º) int socket ( int dominio, int tipo, int protocolo )  
