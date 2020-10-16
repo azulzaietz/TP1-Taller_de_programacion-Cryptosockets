@@ -9,7 +9,7 @@ typedef struct {
     const char* server_host;
     const char* server_port;
     const char* method;
-    unsigned char* key;
+    const char* key;
 } client_t;
 
 /* *****************************************************************

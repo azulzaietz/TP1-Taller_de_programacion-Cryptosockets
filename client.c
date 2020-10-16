@@ -9,7 +9,7 @@ void init_client(client_t* self, const char* server_host, const char* server_por
     self->server_host = server_host;
     self->server_port = server_port;
     self->method = method;
-    self->key = (unsigned char*) key;
+    self->key = key;
 }
 
 void send_coded_message_to_server(client_t* self) {

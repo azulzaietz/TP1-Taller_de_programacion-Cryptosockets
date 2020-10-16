@@ -7,7 +7,7 @@
  * *****************************************************************/
 
 typedef struct {
-    unsigned char* key;
+    const char* key;
 } vigenere_t;
 
 /* *****************************************************************
@@ -16,7 +16,7 @@ typedef struct {
 
 //Crea un cifrador de vigenere
 //Post: devuelve un cifrador con la clave a utilizar para cifrar y descifrar
-int vigenere_create(vigenere_t* self, unsigned char* key);
+int vigenere_create(vigenere_t* self, const char* key);
 
 //Libera la memoria reservada para el cifrador.
 //Pre: el cifrador fue inicializado (creado)

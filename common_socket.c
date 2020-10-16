@@ -14,7 +14,7 @@ void socket_uninit(socket_t* self){
     }
 }
 
-static struct addrinfo* _get_addrinfo(socket_t* self, const char* host, const char* service, int flags) {
+struct addrinfo* _get_addrinfo(socket_t* self, const char* host, const char* service, int flags) {
 	int error;
 	struct addrinfo *addr_list;
 	struct addrinfo hints;
@@ -36,7 +36,7 @@ bool socket_bind_and_listen(socket_t* self, const char* host, const char* servic
 	int fd;
 	int val = 1;
 	struct addrinfo *addr, *addr_list;
-	if ((addr_list = _get_addrinfo(self, host, service, SERVER_FLAGS)) < 0) return false;
+	if ((addr_list = _get_addrinfo(self, host, service, SERVER_FLAGS)) == NULL) return false;
 
 	for (addr = addr_list; addr && !bind_error; addr = addr->ai_next) {
         fd = socket(addr->ai_family, addr->ai_socktype, addr->ai_protocol);
@@ -81,9 +81,7 @@ bool socket_connect(socket_t* self, const char* host, const char* service){
 	bool connection = false;
 
     struct addrinfo *addr, *addr_list;
-    if ((addr_list = _get_addrinfo(self, host, service, CLIENT_FLAGS)) == NULL) {
-        return false;
-    }
+    if ((addr_list = _get_addrinfo(self, host, service, CLIENT_FLAGS)) == NULL) return false;
 
     for (addr = addr_list; addr && !connection; addr = addr->ai_next) {
         fd = socket(addr->ai_family, addr->ai_socktype, addr->ai_protocol);
@@ -122,6 +120,8 @@ ssize_t socket_send(socket_t* self, const char* buffer, size_t length){
         total_bytes_sent += bytes;
         remaining_bytes -= bytes;
     }
+
+    return total_bytes_sent;
 }
 
 ssize_t socket_receive(socket_t* self, char* buffer, size_t length){
@@ -140,9 +140,11 @@ ssize_t socket_receive(socket_t* self, char* buffer, size_t length){
             fprintf(stderr, "socket_receive-->recv: %s\n", strerror(errno));
             return bytes;
         }
-        if (bytes == 0) return total_bytes_received;;
+        if (bytes == 0) return total_bytes_received;
         
         total_bytes_received += bytes;
         remaining_bytes -= bytes;
     }
+
+    return total_bytes_received;
 }

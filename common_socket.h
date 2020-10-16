@@ -40,7 +40,7 @@ void socket_init(socket_t* self, int fd);
 void socket_uninit(socket_t* self);
 
 //Devuelve una lista de posibles direcciones para conectarse.
-static struct addrinfo* _get_addrinfo(socket_t* self, const char* host, const char* service, int flags);
+struct addrinfo* _get_addrinfo(socket_t* self, const char* host, const char* service, int flags);
 
 //Devuelve true si pudo conectarse a un puerto y activarse para recibir conexiones,
 //false en caso de error.
