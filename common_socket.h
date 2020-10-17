@@ -53,9 +53,9 @@ int socket_accept(socket_t* listener, socket_t* peer);
 bool socket_connect(socket_t* self, const char* host, const char* service);
 
 //Devuelve la cantidad de bytes enviados o -1 si ocurrió un error.
-ssize_t socket_send(socket_t* self, const char* buffer, size_t length);
+ssize_t socket_send(socket_t* self, unsigned char* buffer, size_t length);
 
 //Devuelve la cantidad de bytes recibidos o -1 si ocurrió un error.
-ssize_t socket_receive(socket_t* self, char* buffer, size_t length);
+ssize_t socket_receive(socket_t* self, unsigned char* buffer, size_t length);
 
 #endif

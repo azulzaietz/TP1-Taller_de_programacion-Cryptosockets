@@ -39,7 +39,7 @@ int code_file(file_coder_t* self, socket_t* socket) {
     }
     return 0;
 }
-/************************************************************************************************/
+************************************************************************************************/
 int file_coder_init(file_coder_t* self, const char* file_name) {
 
     if (file_name == NULL) self->fp = stdin;

@@ -100,7 +100,7 @@ bool socket_connect(socket_t* self, const char* host, const char* service){
      
 }
 
-ssize_t socket_send(socket_t* self, const char* buffer, size_t length){
+ssize_t socket_send(socket_t* self, unsigned char* buffer, size_t length){
 
 	if (length == 0) return 0;
 
@@ -125,7 +125,7 @@ ssize_t socket_send(socket_t* self, const char* buffer, size_t length){
     return total_bytes_sent;
 }
 
-ssize_t socket_receive(socket_t* self, char* buffer, size_t length){
+ssize_t socket_receive(socket_t* self, unsigned char* buffer, size_t length){
 
 	if (length == 0) return 0;
 

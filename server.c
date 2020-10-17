@@ -16,19 +16,6 @@ void receive_coded_message_from_client(server_t* self) {
 
     socket_accept(&socket, &peer);
 
-    ssize_t bytes_received = 0;
-
-    while ((bytes_received = socket_receive(&peer, buffer, BUF_SIZE)) != 0) {
-        _decode_message(self, buffer, bytes_received);
-    }
-
-    socket_uninit(&socket);
-}
-
-void _decode_message(server_t* self, unsigned char* buffer, ssize_t bytes_received) {
-
-    fwrite(buffer, sizeof(char), bytes_received, stdout);
-
     char* method_cesar = "cesar";
     char* method_vigenere = "vigenere";
     char* method_rc4 = "rc4";
@@ -41,17 +28,49 @@ void _decode_message(server_t* self, unsigned char* buffer, ssize_t bytes_receiv
     if (strcmp(self->method, method_cesar) == 0) {
 
         cesar_create(&cesar, self->key);
-        cesar_decode(&cesar, buffer, bytes_received);
+        coder = &cesar;
 
     } if (strcmp(self->method, method_vigenere) == 0) {
 
         vigenere_create(&vigenere, self->key);
-        vigenere_decode(&vigenere, buffer, bytes_received);
+        coder = &vigenere;
 
     } if (strcmp(self->method, method_rc4) == 0) {
  
         rc4_create(&rc4, self->key);
-        //rc4_decode(&rc4, buffer, bytes_received);
+        coder = &rc4;
+
+    }
+
+    ssize_t bytes_received = 0;
+
+    while ((bytes_received = socket_receive(&peer, buffer, BUF_SIZE)) != 0) {
+        _decode_message(self, buffer, bytes_received, coder);
+    }
+
+    socket_uninit(&socket);
+}
+
+void _decode_message(server_t* self, unsigned char* buffer, ssize_t bytes_received, void* coder) {
+
+    //fwrite(buffer, sizeof(char), bytes_received, stdout);
+
+    char* method_cesar = "cesar";
+    char* method_vigenere = "vigenere";
+    char* method_rc4 = "rc4";
+
+
+    if (strcmp(self->method, method_cesar) == 0) {
+                
+        cesar_decode(coder, buffer, bytes_received);
+
+    } if (strcmp(self->method, method_vigenere) == 0) {
+
+        vigenere_decode(coder, buffer, bytes_received);
+
+    } if (strcmp(self->method, method_rc4) == 0) {
+
+        rc4_code(coder, buffer, bytes_received);
 
     }
 

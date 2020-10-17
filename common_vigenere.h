@@ -8,6 +8,7 @@
 
 typedef struct {
     unsigned char* key;
+    size_t len_key;
 } vigenere_t;
 
 /* *****************************************************************

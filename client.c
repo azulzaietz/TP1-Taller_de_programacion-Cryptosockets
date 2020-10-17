@@ -24,7 +24,7 @@ void send_coded_message_to_server(client_t* self) {
     file_coder_uninit(&file_coder);
     socket_uninit(&socket);
 }
-/**********************************************************************************************/
+**********************************************************************************************/
 
 
 void send_coded_message_to_server(client_t* self) {

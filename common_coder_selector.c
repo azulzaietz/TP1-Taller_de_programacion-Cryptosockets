@@ -1,3 +1,5 @@
+char buffer;
+
 /*#include "common_coder_selector.h"
 
 void coder_selector_init(coder_selector_t* self, const char* method, const char* key) {
@@ -35,5 +37,4 @@ void _select_coder_method(coder_selector_t* self, const char* method) {
 
     }
 
-}
-*/
+} */
