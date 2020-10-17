@@ -53,8 +53,6 @@ void receive_coded_message_from_client(server_t* self) {
 
 void _decode_message(server_t* self, unsigned char* buffer, ssize_t bytes_received, void* coder) {
 
-    //fwrite(buffer, sizeof(char), bytes_received, stdout);
-
     char* method_cesar = "cesar";
     char* method_vigenere = "vigenere";
     char* method_rc4 = "rc4";
