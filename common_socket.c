@@ -106,7 +106,7 @@ ssize_t socket_send(socket_t* self, unsigned char* buffer, size_t length){
 
     int remaining_bytes = length;
     int total_bytes_sent = 0;
-    ssize_t bytes = 0;
+    ssize_t bytes;
 
     while (total_bytes_sent < length) {
 
@@ -131,7 +131,7 @@ ssize_t socket_receive(socket_t* self, unsigned char* buffer, size_t length){
 
     int remaining_bytes = length;
     int total_bytes_received = 0;
-    ssize_t bytes = 0;
+    ssize_t bytes;
 
     while (total_bytes_received < length) {
 
