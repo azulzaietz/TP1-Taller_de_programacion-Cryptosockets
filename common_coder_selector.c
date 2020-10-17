@@ -1,4 +1,4 @@
-#include "common_coder_selector.h"
+/*#include "common_coder_selector.h"
 
 void coder_selector_init(coder_selector_t* self, const char* method, const char* key) {
     self->key = key;
@@ -15,23 +15,24 @@ void _select_coder_method(coder_selector_t* self, const char* method) {
         
         cesar_t* cesar;
         self->coder = cesar;
-        /*cesar_create(self->coder, self->key);
-        self->coder_t = cesar_code;*/
+        cesar_create(self->coder, self->key);
+        self->coder_t = cesar_code;
 
     } if (strcmp(method, method_vigenere) == 0) {
 
         vigenere_t* vigenere;
         self->coder = vigenere;
-        /*vigenere_create(self->coder, self->key);
-        self->coder_t = vigenere_code;*/
+        vigenere_create(self->coder, self->key);
+        self->coder_t = vigenere_code;
 
     } if (strcmp(method, method_rc4) == 0) {
  
         rc4_t* rc4;
         self->coder = rc4;
-        /*rc4_create(self->coder, self->key);
-        self->coder_t = rc4_code;*/
+        rc4_create(self->coder, self->key);
+        self->coder_t = rc4_code;
 
     }
 
 }
+*/

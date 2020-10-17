@@ -6,7 +6,6 @@ int cesar_create(cesar_t* self, const char* key) {
 }
 
 void cesar_code(cesar_t* self, unsigned char *message, size_t read_bytes){
-    printf("estoy en cesar");
     for (int i = 0; i < read_bytes; i++){
         message[i] = (message[i] + self->key) % 256;
     }
