@@ -1,4 +1,6 @@
 #include "common_file_coder.h"
+#include "common_coder_selector.h"
+#include "common_socket.h"
 
 /* *****************************************************************
  *                DEFINICION DE LOS TIPOS DE DATOS

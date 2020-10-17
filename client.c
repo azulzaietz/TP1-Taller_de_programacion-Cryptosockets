@@ -12,11 +12,13 @@ void send_coded_message_to_server(client_t* self) {
     socket_t socket;
     socket_connect(&socket, self->server_host, self->server_port);
 
-    file_coder_t file_coder;
-    file_coder_init(&file_coder, NULL, self->method, self->key);
+    coder_selector_t coder_selector;
+    coder_selector_init(&coder_selector, self->method, self->key);
 
-    cesar_t cesar;
-    code_file(&file_coder, &socket, &cesar);
+    file_coder_t file_coder;
+    file_coder_init(&file_coder, NULL, &coder_selector);
+
+    code_file(&file_coder, &socket);
 
     file_coder_uninit(&file_coder);
     socket_uninit(&socket);
