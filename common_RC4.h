@@ -9,7 +9,6 @@ typedef struct {
     unsigned char state_vector[256];
     unsigned char i;
     unsigned char j;
-
 } rc4_t;
 
 /* *****************************************************************

@@ -15,7 +15,7 @@ void socket_uninit(socket_t* self){
     }
 }
 
-struct addrinfo* _get_addrinfo (socket_t* self, const char* host, const char* service, int flags) {
+struct addrinfo* _get_addrinfo(socket_t* self, const char* host, const char* service, int flags) {
 	int error;
 	struct addrinfo *addr_list;
 	struct addrinfo hints;
@@ -95,7 +95,6 @@ bool socket_connect(socket_t* self, const char* host, const char* service){
 
 	socket_init(self, fd);
     return true;
-     
 }
 
 ssize_t socket_send(socket_t* self, unsigned char* buffer, size_t length){
