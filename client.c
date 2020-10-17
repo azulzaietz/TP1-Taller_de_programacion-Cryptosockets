@@ -7,7 +7,7 @@ void init_client(client_t* self, const char* server_host, const char* server_por
     self->key = key;
 }
 
-/************************************ TODO QUE FUNCIONE ESTA **********************************
+/************************************ TODO QUE FUNCIONE ESTA **********************************/
 void send_coded_message_to_server(client_t* self) {
     
     socket_t socket;
@@ -24,8 +24,9 @@ void send_coded_message_to_server(client_t* self) {
     file_coder_uninit(&file_coder);
     socket_uninit(&socket);
 }
-**********************************************************************************************/
+/**********************************************************************************************/
 
+/*
 void send_coded_message_to_server(client_t* self) {
     
     socket_t socket;
@@ -65,3 +66,4 @@ void send_coded_message_to_server(client_t* self) {
     file_coder_uninit(&file_coder);
     socket_uninit(&socket);
 }
+*/
