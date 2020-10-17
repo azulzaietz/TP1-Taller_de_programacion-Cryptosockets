@@ -1,13 +1,14 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
+#include <stdlib.h>
 
 /* *****************************************************************
  *                DEFINICION DE LOS TIPOS DE DATOS
  * *****************************************************************/
 
 typedef struct {
-    unsigned char key;
+    int key;
 } cesar_t;
 
 /* *****************************************************************

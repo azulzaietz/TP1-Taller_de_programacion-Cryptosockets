@@ -1,7 +1,7 @@
 #include "common_cesar.h"
 
 int cesar_create(cesar_t* self, const char* key) {
-    self->key = (unsigned char) *key;
+    self->key = atoi(key);
     return 0;
 }
 
