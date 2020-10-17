@@ -1,7 +1,7 @@
 #include "common_file_coder.h"
 
 /************************* TODO QUE FUNCIONE ESTA ********************************************/
-/*********************************************************************************************/
+/*********************************************************************************************
 int file_coder_init(file_coder_t* self, const char* file_name, coder_selector_t* coder_selector) {
 
     if (file_name == NULL) self->fp = stdin;
@@ -39,7 +39,7 @@ int code_file(file_coder_t* self, socket_t* socket) {
     }
     return 0;
 }
-/************************************************************************************************
+/************************************************************************************************/
 int file_coder_init(file_coder_t* self, const char* file_name) {
 
     if (file_name == NULL) self->fp = stdin;
@@ -87,5 +87,3 @@ int code_file(file_coder_t* self, socket_t* socket, void* coder, const char* met
     }
     return 0;
 }
-
-*/
