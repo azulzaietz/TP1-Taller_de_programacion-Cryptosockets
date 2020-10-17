@@ -1,3 +1,4 @@
+#define _POSIX_C_SOURCE 200112L
 #include "common_socket.h"
 
 void socket_init(socket_t* self, int fd){
