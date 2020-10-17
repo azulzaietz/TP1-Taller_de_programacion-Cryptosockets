@@ -39,27 +39,28 @@ void send_coded_message_to_server(client_t* self) {
     char* method_rc4 = "rc4";
 
     void* coder;
-    cesar_t* cesar;
-    vigenere_t* vigenere;
-    rc4_t* rc4;
+    cesar_t cesar;
+    vigenere_t vigenere;
+    rc4_t rc4;
 
     if (strcmp(self->method, method_cesar) == 0) {
 
-        cesar_create(cesar, self->key);
+        cesar_create(&cesar, self->key);
+        coder = &cesar;
 
     } if (strcmp(self->method, method_vigenere) == 0) {
 
-        vigenere_create(vigenere, self->key);
-        coder = vigenere;
+        vigenere_create(&vigenere, self->key);
+        coder = &vigenere;
 
     } if (strcmp(self->method, method_rc4) == 0) {
  
-        rc4_create(rc4, self->key);
-        coder = rc4;
+        rc4_create(&rc4, self->key);
+        coder = &rc4;
 
     }
 
-    code_file(&file_coder, &socket, cesar, self->method);
+    code_file(&file_coder, &socket, coder, self->method);
 
     file_coder_uninit(&file_coder);
     socket_uninit(&socket);
