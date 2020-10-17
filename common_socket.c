@@ -6,16 +6,16 @@ void socket_init(socket_t* self, int fd){
 }
 
 void socket_uninit(socket_t* self){
-	if (!self) return;
+	if (!self) {return;}
     if (shutdown(self->fd, SHUT_RDWR) == -1) {
 		fprintf(stderr, "socket_uninit-->shutdown: %s\n", strerror(errno));
-    }
+    } 
     if (close(self->fd) == -1) {
 		fprintf(stderr, "socket_uninit-->close: %s\n", strerror(errno));
     }
 }
 
-struct addrinfo* _get_addrinfo(socket_t* self, const char* host, const char* service, int flags) {
+struct addrinfo* _get_addrinfo (socket_t* self, const char* host, const char* service, int flags) {
 	int error;
 	struct addrinfo *addr_list;
 	struct addrinfo hints;
@@ -32,7 +32,6 @@ struct addrinfo* _get_addrinfo(socket_t* self, const char* host, const char* ser
 }
 
 bool socket_bind_and_listen(socket_t* self, const char* host, const char* service){
-
 	bool bind_error = false;
 	int fd;
 	int val = 1;
@@ -77,7 +76,6 @@ int socket_accept(socket_t* listener, socket_t* peer){
 }
 
 bool socket_connect(socket_t* self, const char* host, const char* service){
-
 	int fd;
 	bool connection = false;
 
@@ -101,16 +99,13 @@ bool socket_connect(socket_t* self, const char* host, const char* service){
 }
 
 ssize_t socket_send(socket_t* self, unsigned char* buffer, size_t length){
-
 	if (length == 0) return 0;
 
     int remaining_bytes = length;
     int total_bytes_sent = 0;
-    ssize_t bytes;
 
     while (total_bytes_sent < length) {
-
-        bytes = send(self->fd, &buffer[total_bytes_sent], remaining_bytes, MSG_NOSIGNAL);
+        ssize_t bytes = send(self->fd, &buffer[total_bytes_sent], remaining_bytes, MSG_NOSIGNAL);
 
         if (bytes == -1) {
 			fprintf(stderr, "socket_send-->send: %s\n", strerror(errno));
@@ -126,16 +121,13 @@ ssize_t socket_send(socket_t* self, unsigned char* buffer, size_t length){
 }
 
 ssize_t socket_receive(socket_t* self, unsigned char* buffer, size_t length){
-
 	if (length == 0) return 0;
 
     int remaining_bytes = length;
     int total_bytes_received = 0;
-    ssize_t bytes;
 
     while (total_bytes_received < length) {
-
-        bytes = recv(self->fd, &buffer[total_bytes_received], remaining_bytes, 0);
+        ssize_t bytes = recv(self->fd, &buffer[total_bytes_received], remaining_bytes, 0);
 
         if (bytes == -1) {
             fprintf(stderr, "socket_receive-->recv: %s\n", strerror(errno));

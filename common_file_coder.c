@@ -41,10 +41,11 @@ int code_file(file_coder_t* self, socket_t* socket) {
 }
 ************************************************************************************************/
 int file_coder_init(file_coder_t* self, const char* file_name) {
-
-    if (file_name == NULL) self->fp = stdin;
-    else self->fp = fopen(file_name, "rb");
-
+    if (file_name == NULL) {
+        self->fp = stdin;
+    } else {
+        self->fp = fopen(file_name, "rb");
+    }
     return 0;
 }
 
@@ -59,29 +60,21 @@ int file_coder_uninit(file_coder_t* self) {
 }
 
 int code_file(file_coder_t* self, socket_t* socket, void* coder, const char* method) {
-
     unsigned char buffer[BUF_SIZE];
 
     char* method_cesar = "cesar";
     char* method_vigenere = "vigenere";
     char* method_rc4 = "rc4";
 
-    while(!feof(self->fp)){
-
+    while (!feof(self->fp)) {
         size_t read_bytes = fread(buffer, sizeof(char), BUF_SIZE, self->fp);
 
         if (strcmp(method, method_cesar) == 0) {
-            
 	        cesar_code(coder, buffer, read_bytes);
-
-	    } if (strcmp(method, method_vigenere) == 0) {
-
+	    } else if (strcmp(method, method_vigenere) == 0) {
 	        vigenere_code(coder, buffer, read_bytes);
-
-	    } if (strcmp(method, method_rc4) == 0) {
-	 
+	    } else if (strcmp(method, method_rc4) == 0) {
 	        rc4_code(coder, buffer, read_bytes);
-
 	    }
         socket_send(socket, buffer, read_bytes);
     }

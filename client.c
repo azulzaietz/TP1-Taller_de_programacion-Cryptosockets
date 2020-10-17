@@ -28,7 +28,6 @@ void send_coded_message_to_server(client_t* self) {
 
 
 void send_coded_message_to_server(client_t* self) {
-    
     socket_t socket;
     socket_connect(&socket, self->server_host, self->server_port);
 
@@ -45,20 +44,14 @@ void send_coded_message_to_server(client_t* self) {
     rc4_t rc4;
 
     if (strcmp(self->method, method_cesar) == 0) {
-
         cesar_create(&cesar, self->key);
         coder = &cesar;
-
-    } if (strcmp(self->method, method_vigenere) == 0) {
-
+    } else if (strcmp(self->method, method_vigenere) == 0) {
         vigenere_create(&vigenere, self->key);
         coder = &vigenere;
-
-    } if (strcmp(self->method, method_rc4) == 0) {
- 
+    } else if (strcmp(self->method, method_rc4) == 0) {
         rc4_create(&rc4, self->key);
         coder = &rc4;
-
     }
 
     code_file(&file_coder, &socket, coder, self->method);

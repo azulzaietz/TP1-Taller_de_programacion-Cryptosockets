@@ -8,7 +8,6 @@ int rc4_create(rc4_t* self, const char* key) {
 }
 
 void _create_state_vector(const char* key, unsigned char* s) {
-
     for (int i = 0; i < 256; i++) {
         s[i] = i;
     }
@@ -26,7 +25,6 @@ void _swap(unsigned char* s, int pos1, int pos2) {
 }
 
 void rc4_code(rc4_t* self, unsigned char *message, size_t read_bytes) {
-
     for (int i = 0; i < read_bytes; i++) {
         self->i = (self->i + 1) % 256;
         self->j = (self->j + self->state_vector[self->i]) % 256;
@@ -34,6 +32,3 @@ void rc4_code(rc4_t* self, unsigned char *message, size_t read_bytes) {
         message[i] = message[i] ^ self->state_vector[ (self->state_vector[self->i] + self->state_vector[self->j]) % 256];
     }
 }
-
-
-
