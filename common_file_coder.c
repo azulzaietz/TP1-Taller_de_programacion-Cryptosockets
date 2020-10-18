@@ -64,19 +64,14 @@ int file_coder_uninit(file_coder_t* self) {
 int code_file(file_coder_t* self, socket_t* socket, 
     void* coder, const char* method) {
     unsigned char buffer[BUF_SIZE];
-    size_t read_bytes;
 
     char* method_cesar = "cesar";
     char* method_vigenere = "vigenere";
     char* method_rc4 = "rc4";
 
     while (!feof(self->fp)) {
-        size_t bytes = fread(buffer, sizeof(char), BUF_SIZE, self->fp);
-        if (buffer[bytes] == 10) {
-            read_bytes = bytes -1;
-        } else {
-            read_bytes = bytes;
-        }
+        size_t read_bytes = fread(buffer, sizeof(char), BUF_SIZE, self->fp);
+        //if (buffer[read_bytes] == 10) {read_bytes--;}
         if (strcmp(method, method_cesar) == 0) {
 	        cesar_code(coder, buffer, read_bytes);
 	    } else if (strcmp(method, method_vigenere) == 0) {
