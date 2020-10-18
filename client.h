@@ -11,6 +11,7 @@ typedef struct {
     const char* server_port;
     const char* method;
     const char* key;
+    void* coder;
 } client_t;
 
 /* *****************************************************************
