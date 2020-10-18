@@ -72,7 +72,7 @@ int code_file(file_coder_t* self, socket_t* socket,
 
     while (!feof(self->fp)) {
         size_t bytes = fread(buffer, sizeof(char), BUF_SIZE, self->fp);
-        if (buffer[read_bytes] == 10) {
+        if (buffer[bytes] == 10) {
             read_bytes = bytes -1;
         } else {
             read_bytes = bytes;
