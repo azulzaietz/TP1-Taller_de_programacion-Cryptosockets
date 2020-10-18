@@ -64,7 +64,7 @@ int file_coder_uninit(file_coder_t* self) {
 int code_file(file_coder_t* self, socket_t* socket, 
     void* coder, const char* method) {
     unsigned char buffer[BUF_SIZE];
-    size_t read_bytes = 0;
+    size_t read_bytes;
 
     char* method_cesar = "cesar";
     char* method_vigenere = "vigenere";
