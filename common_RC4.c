@@ -29,6 +29,7 @@ void rc4_code(rc4_t* self, unsigned char *message, size_t read_bytes) {
         self->i = (self->i + 1) % 256;
         self->j = (self->j + self->state_vector[self->i]) % 256;
         _swap(self->state_vector, self->i, self->j);
-        message[i] = message[i] ^ self->state_vector[ (self->state_vector[self->i] + self->state_vector[self->j]) % 256];
+        unsigned char pos = self->state_vector[self->i] + self->state_vector[self->j];
+        message[i] = message[i] ^ self->state_vector[ pos % 256];
     }
 }

@@ -17,7 +17,8 @@ typedef struct {
  *                PRIMITIVAS DEL CLIENTE
  * *****************************************************************/
 
-void init_client(client_t* self, const char* server_host, const char* server_port, const char* method, const char* key);
+void init_client(client_t* self, const char* server_host, 
+    const char* server_port, const char* method, const char* key);
 
 void send_coded_message_to_server(client_t* self);
 

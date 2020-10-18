@@ -1,7 +1,7 @@
 #include "common_file_coder.h"
 
-/************************* TODO QUE FUNCIONE ESTA ********************************************/
-/*********************************************************************************************
+/************************* TODO QUE FUNCIONE ESTA **********************/
+/************************************************************************
 int file_coder_init(file_coder_t* self, const char* file_name, coder_selector_t* coder_selector) {
 
     if (file_name == NULL) self->fp = stdin;
@@ -52,14 +52,16 @@ int file_coder_init(file_coder_t* self, const char* file_name) {
 int file_coder_uninit(file_coder_t* self) {
     if (self->fp != stdin) {
         if (fclose(self->fp) == EOF) {
-//            printf(stderr, "file_reader_uninit-->close %s\n", strerror(errno));
+//            printf(stderr, "file_reader_uninit-->close %s\n", 
+//              strerror(errno));
             return -1;
         }
     }
     return 0;
 }
 
-int code_file(file_coder_t* self, socket_t* socket, void* coder, const char* method) {
+int code_file(file_coder_t* self, socket_t* socket, 
+    void* coder, const char* method) {
     unsigned char buffer[BUF_SIZE];
 
     char* method_cesar = "cesar";

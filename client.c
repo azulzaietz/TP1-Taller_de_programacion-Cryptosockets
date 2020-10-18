@@ -1,6 +1,7 @@
 #include "client.h"
 
-void init_client(client_t* self, const char* server_host, const char* server_port, const char* method, const char* key) {
+void init_client(client_t* self, const char* server_host, 
+    const char* server_port, const char* method, const char* key) {
     self->server_host = server_host;
     self->server_port = server_port;
     self->method = method;

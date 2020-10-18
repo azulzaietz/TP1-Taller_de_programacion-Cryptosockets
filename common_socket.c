@@ -84,13 +84,16 @@ bool socket_connect(socket_t* self, const char* host, const char* service){
 	bool connection = false;
 
     struct addrinfo *addr, *addr_list;
-    if ((addr_list = _get_addrinfo(self, host, service, CLIENT_FLAGS)) == NULL) {
+    if ((addr_list = _get_addrinfo(self, host, 
+        service, CLIENT_FLAGS)) == NULL) {
         return false;
     }
 
     for (addr = addr_list; addr && !connection; addr = addr->ai_next) {
         fd = socket(addr->ai_family, addr->ai_socktype, addr->ai_protocol);
-        if (connect(fd, addr->ai_addr, addr->ai_addrlen) != -1) connection = true;
+        if (connect(fd, addr->ai_addr, addr->ai_addrlen) != -1) {
+            connection = true;
+        }
     }
     freeaddrinfo(addr_list);
 

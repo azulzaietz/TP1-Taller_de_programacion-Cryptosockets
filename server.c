@@ -1,6 +1,7 @@
 #include "server.h"
 
-void server_init(server_t* self, const char* server_port, const char* method, const char* key) {
+void server_init(server_t* self, const char* server_port,
+    const char* method, const char* key) {
     self->server_port = server_port;
     self->method = method;
     self->key = key;
@@ -44,7 +45,8 @@ void receive_coded_message_from_client(server_t* self) {
     socket_uninit(&socket);
 }
 
-void _decode_message(server_t* self, unsigned char* buffer, ssize_t bytes_received, void* coder) {
+void _decode_message(server_t* self, unsigned char* buffer, 
+    ssize_t bytes_received, void* coder) {
     char* method_cesar = "cesar";
     char* method_vigenere = "vigenere";
     char* method_rc4 = "rc4";

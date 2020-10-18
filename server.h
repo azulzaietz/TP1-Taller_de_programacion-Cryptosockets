@@ -15,10 +15,12 @@ typedef struct {
  *                PRIMITIVAS DEL SERVIDOR
  * *****************************************************************/
 
-void server_init(server_t* self, const char* server_port, const char* method, const char* key);
+void server_init(server_t* self, const char* server_port, 
+    const char* method, const char* key);
 
 void receive_coded_message_from_client(server_t* self);
 
-void _decode_message(server_t* self, unsigned char* buffer, ssize_t bytes_received, void* coder);
+void _decode_message(server_t* self, unsigned char* buffer, 
+    ssize_t bytes_received, void* coder);
 
 void server_uninit(server_t* self);
