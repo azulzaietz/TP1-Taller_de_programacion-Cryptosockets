@@ -1,6 +1,7 @@
 #include "common_long_option_reader.h"
 
-void read_long_options(const char** method, const char** key, int argc, char* const* argv) {	
+void read_long_options(const char** method, const char** key, 
+int argc, char* const* argv) {	
     const char* str_key = "key";
     const char* str_method = "method";
 	const char* method_cesar = "cesar";
