@@ -1,10 +1,6 @@
 #include "common_socket.h"
 #include "common_file_coder.h"
-
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <getopt.h>
+#include "common_long_option_reader.h"
 
 /* *****************************************************************
  *                DEFINICION DE LOS TIPOS DE DATOS
@@ -20,8 +16,7 @@ typedef struct {
  *                PRIMITIVAS DEL SERVIDOR
  * *****************************************************************/
 
-void server_init(server_t* self, const char* server_port, 
-    int argc, char* const* argv);
+void server_init(server_t* self, int argc, char* const* argv);
 
 void receive_coded_message_from_client(server_t* self);
 

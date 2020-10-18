@@ -71,7 +71,6 @@ int code_file(file_coder_t* self, socket_t* socket,
 
     while (!feof(self->fp)) {
         size_t read_bytes = fread(buffer, sizeof(char), BUF_SIZE, self->fp);
-        //if (buffer[read_bytes] == 10) {read_bytes--;}
         if (strcmp(method, method_cesar) == 0) {
 	        cesar_code(coder, buffer, read_bytes);
 	    } else if (strcmp(method, method_vigenere) == 0) {
