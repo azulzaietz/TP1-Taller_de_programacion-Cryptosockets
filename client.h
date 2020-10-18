@@ -18,10 +18,15 @@ typedef struct {
  *                PRIMITIVAS DEL CLIENTE
  * *****************************************************************/
 
+//Lee los parametros de la linea de comandos para inicializar
+//los atributos del cliente.
+//Pre: todos los parametros fueron pasados correctamente
+//Post: el cliente queda listo para ser usado y enviar mensajes.
 void init_client(client_t* self, int argc, char* const* argv);
 
+//Lee los parametros de la linea de comandos
 void _read_command_line(client_t* self, int argc, char* const* argv);
 
+//Envia el mensaje correspondiente al servidor al que esta conectado.
 void send_coded_message_to_server(client_t* self);
 
-void uninit_client(client_t* self);

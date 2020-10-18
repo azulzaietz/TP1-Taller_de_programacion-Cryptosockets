@@ -17,31 +17,24 @@
 
 typedef struct {
     FILE* fp;
-    //coder_selector_t* coder_selector;
 } file_coder_t;
 
 /* *****************************************************************
  *                PRIMITIVAS DEL FILE CODER
  * *****************************************************************/
-/*
-int file_coder_init(file_coder_t* self, const char* file_name, coder_selector_t* coder);
 
-void _init_coder_method(file_coder_t* self, const char* method, const char* key);
-
-int code_file(file_coder_t* self, socket_t* socket);
-
-int file_coder_uninit(file_coder_t* self);
-*/
-
-/* ************************HARDCODEADAS*****************************/
+//Inicializa el cifrador de archivo con el nombre del archivo 
+//pasado por parámetro. Abre el archivo en caso de ser necesario
+//deja el file_coder listo para cifrar un archivo.
 int file_coder_init(file_coder_t* self, const char* file_name);
 
-void _init_coder_method(file_coder_t* self, 
-        const char* method, const char* key);
-
+//Cifra el archivo con el que previamente fue inicializado con el
+//metodo pasado por parametro y lo envía al socket indicado por
+//parametro.
 int code_file(file_coder_t* self, socket_t* socket, 
         void* coder, const char* method);
 
+//Cierra el archivo abierto en la inicializacion en caso de 
+//ser necesario.
 int file_coder_uninit(file_coder_t* self);
 
-/******************************/

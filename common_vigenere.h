@@ -20,12 +20,6 @@ typedef struct {
 //Post: devuelve un cifrador con la clave a utilizar para cifrar y descifrar
 int vigenere_create(vigenere_t* self, const char* key);
 
-//Libera la memoria reservada para el cifrador.
-//Pre: el cifrador fue inicializado (creado)
-//Post: se eliminan todos los elementos del cifrador, se libera 
-//la memoria reservada para el mismo.
-void vigenere_destroy(vigenere_t* cesar);
-
 //Recibe un mensaje a cifrar como parámetro.
 //Post: devuelve el mensaje cifrado
 void vigenere_code(vigenere_t* self, unsigned char *message, size_t read_bytes);

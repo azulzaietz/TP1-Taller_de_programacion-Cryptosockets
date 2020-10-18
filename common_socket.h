@@ -36,7 +36,7 @@ void socket_init(socket_t* self, int fd);
 
 //Cierra el socket.
 //Pre: se inicializó un socket.
-//Post: cierra el socket.
+//Post: cierra y hace un shutdown del socket.
 void socket_uninit(socket_t* self);
 
 //Devuelve una lista de posibles direcciones para conectarse.

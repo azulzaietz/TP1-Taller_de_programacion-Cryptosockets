@@ -11,26 +11,6 @@ void _read_command_line(client_t* self, int argc, char* const* argv) {
     read_long_options(&self->method, &self->key, argc, argv);
 }
 
-/************************************ TODO QUE FUNCIONE ESTA **********************************
-void send_coded_message_to_server(client_t* self) {
-    
-    socket_t socket;
-    socket_connect(&socket, self->server_host, self->server_port);
-
-    coder_selector_t coder_selector;
-    coder_selector_init(&coder_selector, self->method, self->key);
-
-    file_coder_t file_coder;
-    file_coder_init(&file_coder, NULL, &coder_selector);
-
-    code_file(&file_coder, &socket);
-
-    file_coder_uninit(&file_coder);
-    socket_uninit(&socket);
-}
-**********************************************************************************************/
-
-
 void send_coded_message_to_server(client_t* self) {
     socket_t socket;
     socket_connect(&socket, self->server_host, self->server_port);

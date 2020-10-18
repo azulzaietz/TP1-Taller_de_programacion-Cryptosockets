@@ -29,8 +29,5 @@ void _swap(unsigned char* vector, int pos1, int pos2);
 
 //Recibe un mensaje a cifrar como parámetro.
 //Post: devuelve el mensaje cifrado
+//Sirve tambien para descifrar un mensaje cifrado con rc4
 void rc4_code(rc4_t* self, unsigned char *message, size_t read_bytes);
-
-//Recibe un mensaje codificado
-//Post: devuelve el mensaje descifrado (original).
-void rc4_decode(rc4_t* self, unsigned char* message, size_t read_bytes);
