@@ -2,6 +2,11 @@
 #include "common_coder_selector.h"
 #include "common_socket.h"
 
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <getopt.h>
+
 /* *****************************************************************
  *                DEFINICION DE LOS TIPOS DE DATOS
  * *****************************************************************/
@@ -18,7 +23,9 @@ typedef struct {
  * *****************************************************************/
 
 void init_client(client_t* self, const char* server_host, 
-    const char* server_port, const char* method, const char* key);
+    const char* server_port, int argc, char* const* argv);
+
+void _read_command_line(client_t* self, int argc, char* const* argv);
 
 void send_coded_message_to_server(client_t* self);
 

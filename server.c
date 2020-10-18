@@ -1,10 +1,9 @@
 #include "server.h"
 
 void server_init(server_t* self, const char* server_port,
-    const char* method, const char* key) {
+    int argc, char* const* argv) {
     self->server_port = server_port;
-    self->method = method;
-    self->key = key;
+    _read_command_line(self, argc, argv);
 }
 
 void receive_coded_message_from_client(server_t* self) {
@@ -43,6 +42,7 @@ void receive_coded_message_from_client(server_t* self) {
     }
 
     socket_uninit(&socket);
+    socket_uninit(&peer);
 }
 
 void _decode_message(server_t* self, unsigned char* buffer, 
@@ -60,4 +60,43 @@ void _decode_message(server_t* self, unsigned char* buffer,
     }
 
     fwrite(buffer, sizeof(char), bytes_received, stdout);
+}
+
+void _read_command_line(server_t* self, int argc, char* const* argv) {	
+    char* str_key = "key";
+    char* str_method = "method";
+	char* method_cesar = "cesar";
+    char* method_vigenere = "vigenere";
+    char* method_rc4 = "rc4";
+
+    const char* option;
+    int option_index = 0;
+    int c = 0;
+
+    static struct option long_options[] = {
+        {"method", required_argument, 0,  0 },
+        {"key", required_argument, 0,  0 },
+    };
+
+	while (c != -1){
+		c = getopt_long(argc, argv, "-:abc:d::", long_options, &option_index);
+
+       	if (c == 0) {
+        	option = long_options[option_index].name;
+
+			if (strcmp(option, str_method) == 0) {
+				if (strcmp(optarg, method_cesar) == 0){
+		          	self->method = "cesar";
+				} else if (strcmp(optarg, method_vigenere) == 0){
+					self->method = "vigenere";
+				} else if (strcmp(optarg, method_rc4) == 0){
+					self->method = "rc4";
+				} else{
+					printf("No se pasaron metodos\n");
+				}
+			} else if (strcmp(long_options[option_index].name, str_key) == 0){
+				self->key = optarg;
+			}
+        }
+	}
 }

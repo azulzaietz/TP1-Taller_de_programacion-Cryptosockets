@@ -66,15 +66,12 @@ bool socket_bind_and_listen
 
 int socket_accept(socket_t* listener, socket_t* peer){
 	int fd = -1;
-
-    puts("Waiting for incoming connections...");
     
 	if ((peer->fd = accept(listener->fd, NULL, NULL)) < 0) {
 		fprintf(stderr, "socket_accept-->accept: %s\n", strerror(errno));
         return fd;
 	}
-
-    puts("Connection accepted");
+    
     fd = 0;
 	return fd;
 }
