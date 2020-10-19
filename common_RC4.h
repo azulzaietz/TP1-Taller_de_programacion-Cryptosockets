@@ -1,3 +1,6 @@
+#ifndef RC4_H
+#define RC4_H
+
 #include <stdio.h>
 #include <string.h>
 
@@ -31,3 +34,5 @@ void _swap(unsigned char* vector, int pos1, int pos2);
 //Post: devuelve el mensaje cifrado
 //Sirve tambien para descifrar un mensaje cifrado con rc4
 void rc4_code(rc4_t* self, unsigned char *message, size_t read_bytes);
+
+#endif

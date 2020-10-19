@@ -1,3 +1,6 @@
+#ifndef LONG_OPTION_H
+#define LONG_OPTION_H
+
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,3 +15,5 @@
 // "--parametro=parametro"
 void read_long_options(const char** method, const char** key, 
 int argc, char* const* argv);
+
+#endif

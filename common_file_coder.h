@@ -1,8 +1,11 @@
+#ifndef FILE_CODER_H
+#define FILE_CODER_H
+
 #include "common_coder_selector.h"
 #include "common_socket.h"
-#include "common_cesar.h"
-#include "common_vigenere.h"
-#include "common_RC4.h"
+//#include "common_cesar.h"
+//#include "common_vigenere.h"
+//#include "common_RC4.h"
 
 #include <stdio.h>
 #include <stddef.h>
@@ -38,3 +41,4 @@ int code_file(file_coder_t* self, socket_t* socket,
 //ser necesario.
 int file_coder_uninit(file_coder_t* self);
 
+#endif

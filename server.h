@@ -1,6 +1,10 @@
+#ifndef SERVER_H
+#define SERVER_H
+
 #include "common_socket.h"
-#include "common_file_coder.h"
+#include "common_coder_selector.h"
 #include "common_long_option_reader.h"
+#define BUF_SIZE 64
 
 /* *****************************************************************
  *                DEFINICION DE LOS TIPOS DE DATOS
@@ -32,3 +36,4 @@ void receive_coded_message_from_client(server_t* self);
 void _decode_message(server_t* self, unsigned char* buffer, 
     ssize_t bytes_received, void* coder);
 
+#endif

@@ -1,3 +1,6 @@
+#ifndef CESAR_H
+#define CESAR_H
+
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
@@ -26,3 +29,5 @@ void cesar_code(cesar_t* self, unsigned char *message, size_t read_bytes);
 //Recibe un mensaje codificado
 //Post: devuelve el mensaje descifrado (original).
 void cesar_decode(cesar_t* self, unsigned char* message, size_t read_bytes);
+
+#endif

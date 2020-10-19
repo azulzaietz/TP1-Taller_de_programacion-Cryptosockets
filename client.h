@@ -1,3 +1,6 @@
+#ifndef CLIENT_H
+#define CLIENT_H
+
 #include "common_file_coder.h"
 #include "common_coder_selector.h"
 #include "common_socket.h"
@@ -30,3 +33,4 @@ void _read_command_line(client_t* self, int argc, char* const* argv);
 //Envia el mensaje correspondiente al servidor al que esta conectado.
 void send_coded_message_to_server(client_t* self);
 
+#endif

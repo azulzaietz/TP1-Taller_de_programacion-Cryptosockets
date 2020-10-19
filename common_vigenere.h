@@ -1,3 +1,6 @@
+#ifndef VIGENERE_H
+#define VIGENERE_H
+
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
@@ -28,3 +31,5 @@ void vigenere_code(vigenere_t* self, unsigned char *message, size_t read_bytes);
 //Post: devuelve el mensaje descifrado (original).
 void vigenere_decode(vigenere_t* self, unsigned char* message, 
     size_t read_bytes);
+
+#endif
