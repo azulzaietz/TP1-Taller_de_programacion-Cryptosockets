@@ -32,8 +32,4 @@ void _read_command_line(server_t* self, int argc, char* const* argv);
 //descifrado por salida estándar.
 void receive_coded_message_from_client(server_t* self);
 
-//Descifra el mensaje recibido.
-void _decode_message(server_t* self, unsigned char* buffer, 
-    ssize_t bytes_received, void* coder);
-
 #endif
