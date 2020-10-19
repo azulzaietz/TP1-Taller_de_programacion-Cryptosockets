@@ -19,14 +19,13 @@ void _select_coder_method(coder_selector_t* self) {
     if (strcmp(self->method, method_cesar) == 0) {
         self->coder = self->cesar;
         cesar_create(self->coder, self->key);
-    } if (strcmp(self->method, method_vigenere) == 0) {
+    } else if (strcmp(self->method, method_vigenere) == 0) {
         self->coder = self->vigenere;
         vigenere_create(self->coder, self->key);
-    } if (strcmp(self->method, method_rc4) == 0) {
+    } else if (strcmp(self->method, method_rc4) == 0) {
         self->coder = self->rc4;
         rc4_create(self->coder, self->key);
     }
-
 }
 
 void code(coder_selector_t* self, unsigned char* buffer,
