@@ -25,11 +25,7 @@ void send_coded_message_to_server(client_t* self) {
     file_coder_t file_coder;
     file_coder_init(&file_coder, NULL);
 
-    unsigned char buffer[BUF_SIZE];
-    size_t read_bytes = code_file(&file_coder, buffer, 
-    &coder_selector, self->method);
-
-    socket_send(&socket, buffer, read_bytes);
+    code_file(&file_coder, &socket, &coder_selector, self->method);
 
     file_coder_uninit(&file_coder);
     socket_uninit(&socket);
