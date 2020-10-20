@@ -35,6 +35,8 @@ Otras solución que surgió durante de la implementación fue la necesidad de el
 
 ## Diagrama de secuencia: Servidor recibe mensaje de cliente.
 
+Se representa el caso particular en el que el socket recibe una sola vez un mensaje. En caso contrario, se agregaría al esquema un loop agrupando el receive, el decode y el show.
+
 ```plantuml
 @startuml
     Server -> Socket : socket_bind_and_listen()
@@ -52,6 +54,8 @@ Otras solución que surgió durante de la implementación fue la necesidad de el
 
 ## Diagrama de secuencia: Cliente envia mensaje a servidor.
 
+Se representa un caso particular en el que el archivo es de tamaño menor al tamaño del buffer por lo que alcanza con una iteración. Si el archivo fuera más largo en el diagrama de secuencia se agregaría un loop (while !EOF) agrupando el code y el send message.
+
 ```plantuml
 @startuml
     Client -> Socket : socket_connect()
@@ -59,8 +63,7 @@ Otras solución que surgió durante de la implementación fue la necesidad de el
     Client -> FileCoder : file_coder_init()
     Client -> FileCoder: code_file(coder_selector_t, buffer)
     FileCoder -> CoderSelector : code(coder_selector_t, buffer)
-    FileCoder -> Client : read_bytes
-    Client -> Socket : socket_send(buffer, read_bytes)
+    FileCoder -> Socket : socket_send(buffer, read_bytes)
     Client -> FileCoder : file_coder_uninit()
     Client -> Socket : socket_uninit()
     
