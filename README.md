@@ -64,3 +64,65 @@ Otras solución que surgió durante de la implementación fue la necesidad de el
     
 @enduml
 ```
+# Diagrama de clases representativo de la solución final:
+
+```plantuml
+@startuml
+
+class server
+class client
+class socket
+class file_coder
+class cesar
+class vigenere
+class rc4
+
+server : char* method
+server : char* key
+server : char* server_port
+server : receive_coded_message_from_client()
+
+client : char* method
+client : char* key
+client : char* server_port
+client : char* server_host
+client : send_coded_message_to_server()
+
+socket : int fd
+socket : socket_bind_and_listen()
+socket : socket_accept()
+socket : socket_connect()
+socket : socket_send()
+socket : socket_receive()
+
+protocol : client_to_server()
+protocol : server_to_client()
+
+file_coder : FILE* fp
+file_coder : code_file()
+
+cesar: int key
+cesar : cesar_code()
+cesar : cesar_decode()
+
+vigenere : unsigned char* key
+vigenere : size_t len_key
+vigenere : int pos_key
+vigenere : vigenere_code()
+vigenere : vigenere_decode()
+
+rc4 : unsigned char state_vector[256]
+rc4 : unsigned char i
+rc4 : unsigned char j
+rc4 : rc4_code()
+
+client o-- file_coder
+server *-- socket
+client *-- socket
+coder_selector *-- rc4
+coder_selector *-- vigenere
+coder_selector *-- cesar
+client o-- coder_selector
+server o-- coder_selector
+@enduml
+```
