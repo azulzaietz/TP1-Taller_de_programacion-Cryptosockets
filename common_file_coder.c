@@ -20,14 +20,13 @@ int file_coder_uninit(file_coder_t* self) {
     return 0;
 }
 
-int code_file(file_coder_t* self, socket_t* socket, 
+size_t code_file(file_coder_t* self, unsigned char* buffer, 
     coder_selector_t* coder_selector, const char* method) {
-    unsigned char buffer[BUF_SIZE];
+    size_t read_bytes = 0;
 
     while (!feof(self->fp)) {
-        size_t read_bytes = fread(buffer, sizeof(char), BUF_SIZE, self->fp);
+        read_bytes = fread(buffer, sizeof(char), BUF_SIZE, self->fp);
         code(coder_selector, buffer, read_bytes);
-        socket_send(socket, buffer, read_bytes);
     }
-    return 0;
+    return read_bytes;
 }
