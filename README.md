@@ -48,7 +48,7 @@ Otras solución que surgió durante de la implementación fue la necesidad de el
     
 @enduml
 ```
-![server](./socket_receive.svg)
+![server](./server_receive.svg)
 
 ## Diagrama de secuencia: Cliente envia mensaje a servidor.
 
