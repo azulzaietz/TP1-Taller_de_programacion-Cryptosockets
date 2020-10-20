@@ -29,12 +29,10 @@ typedef struct {
 int file_coder_init(file_coder_t* self, const char* file_name);
 
 //Recibe un coder_selector que cifra el archivo con el 
-//metodo correspondiente y lo envía con el socket indicado por
-//parametro.
-//Pre: se inicializaron un socket, un coder selector y un
-//file coder.
+//metodo correspondiente.
+//Pre: un coder selector y un file coder.
 //Post: el archivo indicado en la inicializacion del file_coder
-//fue cifrado y enviado.
+//fue cifrado.
 size_t code_file(file_coder_t* self, unsigned char* buffer, 
     coder_selector_t* coder_selector, const char* method);
 
