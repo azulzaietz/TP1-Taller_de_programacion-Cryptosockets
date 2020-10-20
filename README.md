@@ -95,13 +95,10 @@ socket : socket_connect()
 socket : socket_send()
 socket : socket_receive()
 
-protocol : client_to_server()
-protocol : server_to_client()
-
 file_coder : FILE* fp
 file_coder : code_file()
 
-cesar: int key
+cesar : int key
 cesar : cesar_code()
 cesar : cesar_decode()
 
