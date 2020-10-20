@@ -48,6 +48,8 @@ Otras solución que surgió durante de la implementación fue la necesidad de el
     
 @enduml
 ```
+![server](./socket_receive.svg)
+
 ## Diagrama de secuencia: Cliente envia mensaje a servidor.
 
 ```plantuml
@@ -64,6 +66,8 @@ Otras solución que surgió durante de la implementación fue la necesidad de el
     
 @enduml
 ```
+![client](./client_send.svg)
+
 # Diagrama de clases representativo de la solución final:
 
 ```plantuml
@@ -123,3 +127,4 @@ client o-- coder_selector
 server o-- coder_selector
 @enduml
 ```
+![uml](./uml_tp_cryptosockets.svg)
