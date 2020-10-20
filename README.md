@@ -37,97 +37,14 @@ Otras solución que surgió durante de la implementación fue la necesidad de el
 
 Se representa el caso particular en el que el socket recibe una sola vez un mensaje. En caso contrario, se agregaría al esquema un loop agrupando el receive, el decode y el show.
 
-```plantuml
-@startuml
-    Server -> Socket : socket_bind_and_listen()
-    Server -> Socket : socket_accept()
-    Server -> CoderSelector : coder_selector_init()
-    Server -> Socket : socket_receive()
-    Server -> CoderSelector : decode(coder_selector_t, message)
-    CoderSelector -> Server : decoded message
-    note right Server #palegreen: show message
-    Server -> Socket : socket_uninit()
-    
-@enduml
-```
 ![server](./server_receive.svg)
 
 ## Diagrama de secuencia: Cliente envia mensaje a servidor.
 
 Se representa un caso particular en el que el archivo es de tamaño menor al tamaño del buffer por lo que alcanza con una iteración. Si el archivo fuera más largo en el diagrama de secuencia se agregaría un loop (while !EOF) agrupando el code y el send message.
 
-```plantuml
-@startuml
-    Client -> Socket : socket_connect()
-    Client -> CoderSelector : coder_selector_init()
-    Client -> FileCoder : file_coder_init()
-    Client -> FileCoder: code_file(coder_selector_t, buffer)
-    FileCoder -> CoderSelector : code(coder_selector_t, buffer)
-    FileCoder -> Socket : socket_send(buffer, read_bytes)
-    Client -> FileCoder : file_coder_uninit()
-    Client -> Socket : socket_uninit()
-    
-@enduml
-```
 ![client](./client_send.svg)
 
 # Diagrama de clases representativo de la solución final:
 
-```plantuml
-@startuml
-
-class server
-class client
-class socket
-class file_coder
-class cesar
-class vigenere
-class rc4
-
-server : char* method
-server : char* key
-server : char* server_port
-server : receive_coded_message_from_client()
-
-client : char* method
-client : char* key
-client : char* server_port
-client : char* server_host
-client : send_coded_message_to_server()
-
-socket : int fd
-socket : socket_bind_and_listen()
-socket : socket_accept()
-socket : socket_connect()
-socket : socket_send()
-socket : socket_receive()
-
-file_coder : FILE* fp
-file_coder : code_file()
-
-cesar : int key
-cesar : cesar_code()
-cesar : cesar_decode()
-
-vigenere : unsigned char* key
-vigenere : size_t len_key
-vigenere : int pos_key
-vigenere : vigenere_code()
-vigenere : vigenere_decode()
-
-rc4 : unsigned char state_vector[256]
-rc4 : unsigned char i
-rc4 : unsigned char j
-rc4 : rc4_code()
-
-client o-- file_coder
-server *-- socket
-client *-- socket
-coder_selector *-- rc4
-coder_selector *-- vigenere
-coder_selector *-- cesar
-client o-- coder_selector
-server o-- coder_selector
-@enduml
-```
 ![uml](./uml_tp_cryptosockets.svg)

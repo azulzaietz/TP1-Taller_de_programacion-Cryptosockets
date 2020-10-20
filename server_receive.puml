@@ -1,0 +1,11 @@
+@startuml server_receive
+    Server -> Socket : socket_bind_and_listen()
+    Server -> Socket : socket_accept()
+    Server -> CoderSelector : coder_selector_init()
+    Server -> Socket : socket_receive()
+    Server -> CoderSelector : decode(coder_selector_t, message)
+    CoderSelector -> Server : decoded message
+    note right Server #palegreen: show message
+    Server -> Socket : socket_uninit()
+    
+@enduml

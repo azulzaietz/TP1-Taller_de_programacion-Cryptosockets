@@ -1,0 +1,11 @@
+@startuml client_send
+    Client -> Socket : socket_connect()
+    Client -> CoderSelector : coder_selector_init()
+    Client -> FileCoder : file_coder_init()
+    Client -> FileCoder: code_file(coder_selector_t, buffer)
+    FileCoder -> CoderSelector : code(coder_selector_t, buffer)
+    FileCoder -> Socket : socket_send(buffer, read_bytes)
+    Client -> FileCoder : file_coder_uninit()
+    Client -> Socket : socket_uninit()
+    
+@enduml
