@@ -24,10 +24,6 @@ typedef struct {
 //mensajes.
 void server_init(server_t* self, int argc, char* const* argv);
 
-//Lee los parametros pasados por linea de comandos para
-//inicializar el servidor.
-void _read_command_line(server_t* self, int argc, char* const* argv);
-
 //Recibe un mensaje cifrado del cliente y lo muestra 
 //descifrado por salida estándar.
 void receive_coded_message_from_client(server_t* self);

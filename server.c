@@ -1,12 +1,14 @@
 #include "server.h"
 
-void server_init(server_t* self, int argc, char* const* argv) {
-    _read_command_line(self, argc, argv);
-}
-
-void _read_command_line(server_t* self, int argc, char* const* argv) {	
+//Lee los parametros pasados por linea de comandos para
+//inicializar el servidor.
+static void _read_command_line(server_t* self, int argc, char* const* argv) {	
     self->server_port = argv[1];
     read_long_options(&self->method, &self->key, argc, argv);
+}
+
+void server_init(server_t* self, int argc, char* const* argv) {
+    _read_command_line(self, argc, argv);
 }
 
 void receive_coded_message_from_client(server_t* self) {

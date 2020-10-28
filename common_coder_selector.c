@@ -1,17 +1,8 @@
 #include "common_coder_selector.h"
 
-void coder_selector_init(coder_selector_t* self, const char* method,
-const char* key, cesar_t* cesar, vigenere_t* vigenere,
-rc4_t* rc4) {
-    self->key = key;
-    self->method = method;
-    self->cesar = cesar;
-    self->vigenere = vigenere;
-    self->rc4 = rc4;
-    _select_coder_method(self);
-}
-
-void _select_coder_method(coder_selector_t* self) {
+//Crea el cifrador que corresponde al metodo pasado por parametro
+//en la inicializacion del selector.
+static void _select_coder_method(coder_selector_t* self) {
     char* method_cesar = "cesar";
     char* method_vigenere = "vigenere";
     char* method_rc4 = "rc4";
@@ -26,6 +17,17 @@ void _select_coder_method(coder_selector_t* self) {
         self->coder = self->rc4;
         rc4_create(self->coder, self->key);
     }
+}
+
+void coder_selector_init(coder_selector_t* self, const char* method,
+const char* key, cesar_t* cesar, vigenere_t* vigenere,
+rc4_t* rc4) {
+    self->key = key;
+    self->method = method;
+    self->cesar = cesar;
+    self->vigenere = vigenere;
+    self->rc4 = rc4;
+    _select_coder_method(self);
 }
 
 void code(coder_selector_t* self, unsigned char* buffer,

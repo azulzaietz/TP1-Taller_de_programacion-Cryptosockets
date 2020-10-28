@@ -1,14 +1,15 @@
 #include "client.h"
 
-void init_client(client_t* self, int argc, char* const* argv) {
-    _read_command_line(self, argc, argv);
-}
-
-void _read_command_line(client_t* self, int argc, char* const* argv) {	
+//Lee los parametros de la linea de comandos
+static void _read_command_line(client_t* self, int argc, char* const* argv) {	
     self->server_host = argv[1];
     self->server_port = argv[2];
 
     read_long_options(&self->method, &self->key, argc, argv);
+}
+
+void init_client(client_t* self, int argc, char* const* argv) {
+    _read_command_line(self, argc, argv);
 }
 
 void send_coded_message_to_server(client_t* self) {

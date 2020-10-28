@@ -22,14 +22,6 @@ typedef struct {
 //Post: devuelve un cifrador con la clave a utilizar para cifrar y descifrar
 int rc4_create(rc4_t* self, const char* key);
 
-//Genera vector de entrada para el flujo de cifrado.
-//Vector de 256 elementos con todos los números del 0 al 255 y luego los
-//desordena a partir de la clave secreta compartida por emisor y receptor.
-void _create_state_vector(const char* key, unsigned char* s);
-
-//Intercambia el valor de dos posiciones del vector entre sí.
-void _swap(unsigned char* vector, int pos1, int pos2);
-
 //Recibe un mensaje a cifrar como parámetro.
 //Post: devuelve el mensaje cifrado
 //Sirve tambien para descifrar un mensaje cifrado con rc4
