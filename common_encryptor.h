@@ -16,11 +16,16 @@ typedef struct {
 } encryptor_t;
 
 /* *****************************************************************
- *                PRIMITIVAS DEL CODER SELECTOR
+ *                PRIMITIVAS DEL ENCRYPTOR
  * *****************************************************************/
 
+//Devuelve un puntero a un cifrador del metodo de cesar
 cesar_t* get_cesar(encryptor_t* self);
+
+//Devuelve un puntero a un cifrador del metodo de vigenere
 vigenere_t* get_vigenere(encryptor_t* self);
+
+//Devuelve un puntero a un cifrador del metodo rc4
 rc4_t* get_rc4(encryptor_t* self);
 
 #endif
