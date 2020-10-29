@@ -20,13 +20,12 @@ static void _select_coder_method(coder_selector_t* self) {
 }
 
 void coder_selector_init(coder_selector_t* self, const char* method,
-const char* key, cesar_t* cesar, vigenere_t* vigenere,
-rc4_t* rc4) {
+const char* key, encryptor_t* encryptor) {
     self->key = key;
     self->method = method;
-    self->cesar = cesar;
-    self->vigenere = vigenere;
-    self->rc4 = rc4;
+    self->cesar = get_cesar(encryptor);
+    self->vigenere = get_vigenere(encryptor);
+    self->rc4 = get_rc4(encryptor);
     _select_coder_method(self);
 }
 

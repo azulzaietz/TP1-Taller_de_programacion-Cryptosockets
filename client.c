@@ -16,12 +16,10 @@ void send_coded_message_to_server(client_t* self) {
     socket_t socket;
     socket_connect(&socket, self->server_host, self->server_port);
 
-    cesar_t cesar;
-    vigenere_t vigenere;
-    rc4_t rc4;
+    encryptor_t encryptor;
     coder_selector_t coder_selector;
     coder_selector_init(&coder_selector, self->method, self->key, 
-        &cesar, &vigenere, &rc4);
+        &encryptor);
 
     file_coder_t file_coder;
     file_coder_init(&file_coder, NULL);

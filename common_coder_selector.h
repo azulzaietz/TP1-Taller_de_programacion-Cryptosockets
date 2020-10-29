@@ -1,9 +1,7 @@
 #ifndef CODER_SELECTOR_H
 #define CODER_SELECTOR_H
 
-#include "common_cesar.h"
-#include "common_vigenere.h"
-#include "common_RC4.h"
+#include "common_encryptor.h"
 
 #include <stdio.h>
 #include <stddef.h>
@@ -29,8 +27,7 @@ typedef struct {
 
 //Inicializa el cifrador correspondiente
 void coder_selector_init(coder_selector_t* self, const char* method,
-const char* key, cesar_t* cesar, vigenere_t* vigenere,
-rc4_t* rc4);
+const char* key, encryptor_t* encryptor);
 
 //Cifra un mensaje con el cifrador correspondiente.
 void code(coder_selector_t* self, unsigned char* buffer,

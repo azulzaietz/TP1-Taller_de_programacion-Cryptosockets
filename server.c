@@ -20,12 +20,10 @@ void receive_coded_message_from_client(server_t* self) {
 
     socket_accept(&socket, &peer);
 
-    cesar_t cesar;
-    vigenere_t vigenere;
-    rc4_t rc4;
+    encryptor_t encryptor;
     coder_selector_t coder_selector;
     coder_selector_init(&coder_selector, self->method, self->key, 
-        &cesar, &vigenere, &rc4);
+        &encryptor);
 
     ssize_t bytes_received = 0;
 
