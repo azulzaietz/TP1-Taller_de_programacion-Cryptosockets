@@ -1,9 +1,6 @@
 #ifndef SERVER_H
 #define SERVER_H
 
-#include "common_socket.h"
-#include "common_coder_selector.h"
-#include "common_long_option_reader.h"
 #define BUF_SIZE 64
 
 /* *****************************************************************

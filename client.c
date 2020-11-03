@@ -1,4 +1,8 @@
 #include "client.h"
+#include "common_file_coder.h"
+#include "common_coder_selector.h"
+#include "common_socket.h"
+#include "common_long_option_reader.h"
 
 //Lee los parametros de la linea de comandos
 static void _read_command_line(client_t* self, int argc, char* const* argv) {	

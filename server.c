@@ -1,4 +1,7 @@
 #include "server.h"
+#include "common_socket.h"
+#include "common_coder_selector.h"
+#include "common_long_option_reader.h"
 
 //Lee los parametros pasados por linea de comandos para
 //inicializar el servidor.

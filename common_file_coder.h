@@ -1,9 +1,6 @@
 #ifndef FILE_CODER_H
 #define FILE_CODER_H
 
-#include "common_coder_selector.h"
-#include "common_socket.h"
-
 #include <stdio.h>
 #include <stddef.h>
 #include <stdlib.h>

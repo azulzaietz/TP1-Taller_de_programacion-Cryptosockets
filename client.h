@@ -1,11 +1,6 @@
 #ifndef CLIENT_H
 #define CLIENT_H
 
-#include "common_file_coder.h"
-#include "common_coder_selector.h"
-#include "common_socket.h"
-#include "common_long_option_reader.h"
-
 /* *****************************************************************
  *                DEFINICION DE LOS TIPOS DE DATOS
  * *****************************************************************/
