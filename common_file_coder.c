@@ -1,6 +1,4 @@
 #include "common_file_coder.h"
-#include "common_coder_selector.h"
-#include "common_socket.h"
 
 int file_coder_init(file_coder_t* self, const char* file_name) {
     if (file_name == NULL) {
